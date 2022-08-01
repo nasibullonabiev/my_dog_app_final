@@ -4,7 +4,7 @@
 Dog App Learn working with network
 
 ## ð§ Author(s)
-**Nabiev Nasibullo** [![My Telegram account](https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/640px-Telegram_2019_Logo.svg.png/connect/@f19012022_N.svg?style=social)](@f19012022_N) 
+**Nabiev Nasibullo** [![My Telegram account](connect/t.me/@f19012022_N.svg?style=social)](t.me/@f19012022_N) 
 
 ## Home Page
 <img src="screens/favorite_page.png" height="500em" />
