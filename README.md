@@ -26,7 +26,7 @@ I am developing this program to learn Flutter and Internet connection.
 <img src="screens/home_page.png" height="600em" />
 
 # Upload Page
-<img src="screens/upload_page.png" height="600em" />
+<img src="screens/upload_image.png" height="600em" />
 
 # That's it for now!
 
