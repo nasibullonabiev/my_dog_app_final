@@ -1,23 +1,32 @@
-# Dog App for learn working with network 
+# Hi, I'm Nasibullo
 
-## This application not completed yet.Currently I am working on it
-Dog App Learn working with network
+# This application is not completed yet. Currently, I am working on it.
+I am developing this program to learn Flutter and Internet connection.
 
-## ð§ Author(s)
-**Nabiev Nasibullo** [![My Telegram account](connect/t.me/@f19012022_N.svg?style=social)](t.me/@f19012022_N) 
+## 😃 Author
+**Nabiev Nasibullo** [Telegram: My Telegram](https://t.me/f19012022_N)
+<img src="screens/my_image.jpeg" height="500em" />
 
-## Home Page
-<img src="screens/favorite_page.png" height="500em" />
+## Application for searching and downloading pictures of cute puppies
 
+# ScreenShots
+# Home Page
+<img src="screens/home_page.png" height="600em" />
 
+# My Dogs Page
+<img src="screens/my_dog.png" height="600em" />
 
-This project is a starting point for a Flutter application.
+# Search Page
+<img src="screens/search_page.png" height="600em" />
 
-A few resources to get you started if this is your first Flutter project:
+# Favorite Page
+<img src="screens/favorite_page.png" height="600em" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Vote Page
+<img src="screens/home_page.png" height="600em" />
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Upload Page
+<img src="screens/upload_page.png" height="600em" />
+
+# That's it for now!
+
