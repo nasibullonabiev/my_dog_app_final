@@ -5,6 +5,7 @@ I am developing this program to learn Flutter and Internet connection.
 
 ## 😃 Author
 **Nabiev Nasibullo** [Telegram: My Telegram](https://t.me/f19012022_N)
+**Download App from Telegram channel** [Telegram: My Telegram Channel](https://t.me/+YQimJfJQPqQwZDUy) 
 <img src="screens/my_image.jpeg" height="500em" />
 
 ## Application for searching and downloading pictures of cute puppies
