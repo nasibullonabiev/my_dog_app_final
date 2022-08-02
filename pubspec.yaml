@@ -24,6 +24,7 @@ dependencies:
   http_interceptor: ^1.0.2
   connectivity_plus: any
   share_plus: any
+  url_strategy: any
 
   # database
   hive_flutter: ^1.1.0

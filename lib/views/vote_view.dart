@@ -10,7 +10,8 @@ import '../models/vote_model.dart';
 import '../services/network_service.dart';
 
 class VoteView extends StatefulWidget {
-  const VoteView({Key? key}) : super(key: key);
+  final int crossAxisCount;
+  const VoteView({Key? key, this.crossAxisCount = 2}) : super(key: key);
 
   @override
   State<VoteView> createState() => _VoteViewState();
@@ -31,7 +32,7 @@ class _VoteViewState extends State<VoteView> with AutomaticKeepAliveClientMixin 
 
   void _apiGetAllVote(int screen) async {
     String response = await NetworkService.GET(NetworkService.API_LIST_VOTES,
-            NetworkService.paramsVotesList(limit: 90, page: screen)) ??
+        NetworkService.paramsVotesList(limit: 90, page: screen)) ??
         '[]';
     _items.addAll(voteListFromJson(response));
 
@@ -85,27 +86,38 @@ class _VoteViewState extends State<VoteView> with AutomaticKeepAliveClientMixin 
       child: GridView.custom(
         controller: _scrollController,
         gridDelegate: SliverQuiltedGridDelegate(
-          crossAxisCount: 4,
+          crossAxisCount: widget.crossAxisCount > 4 ? 6 : 4,
           mainAxisSpacing: 4,
           crossAxisSpacing: 4,
           repeatPattern: QuiltedGridRepeatPattern.inverted,
-          pattern: [
+          pattern: widget.crossAxisCount <= 4 ? [
             const QuiltedGridTile(2, 2),
             const QuiltedGridTile(1, 1),
             const QuiltedGridTile(1, 1),
             const QuiltedGridTile(1, 2),
+
+          ]:[
+            const QuiltedGridTile(2, 2),
+            const QuiltedGridTile(1, 1),
+            const QuiltedGridTile(1, 1),
+            const QuiltedGridTile(1, 2),
+            const QuiltedGridTile(1, 1),
+            const QuiltedGridTile(1, 1),
+            const QuiltedGridTile(1, 1),
+            const QuiltedGridTile(1, 1),
+
           ],
         ),
         childrenDelegate: SliverChildBuilderDelegate(
-            (context, index) => CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: _images[index].url!,
-                  placeholder: (context, url) => Container(
-                    color: Colors.primaries[Random().nextInt(18) % 18],
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-            childCount: _images.length,
+              (context, index) => CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: _images[index].url!,
+            placeholder: (context, url) => Container(
+              color: Colors.primaries[Random().nextInt(18) % 18],
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
+          childCount: _images.length,
         ),
       ),
     );

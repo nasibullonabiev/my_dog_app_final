@@ -5,7 +5,8 @@ import '../views/vote_view.dart';
 
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({Key? key}) : super(key: key);
+  final int crossAxisCount;
+  const CategoryPage({Key? key, this.crossAxisCount = 2}) : super(key: key);
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -35,10 +36,10 @@ class _CategoryPageState extends State<CategoryPage> {
             // #favorite
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: selectedScreen == 0 ? Colors.black : Colors.white,
-                elevation: 0,
-                shape: const StadiumBorder(),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15)
+                  primary: selectedScreen == 0 ? Colors.black : Colors.white,
+                  elevation: 0,
+                  shape: const StadiumBorder(),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15)
               ),
               onPressed: () => _onPressedScreen(0),
               child: Text("Favorite", style: TextStyle(color: selectedScreen == 0
@@ -70,9 +71,9 @@ class _CategoryPageState extends State<CategoryPage> {
           selectedScreen = page;
           setState(() {});
         },
-        children: const [
-          FavoriteView(),
-          VoteView(),
+        children:  [
+          FavoriteView(crossAxisCount: widget.crossAxisCount,),
+          VoteView(crossAxisCount: widget.crossAxisCount,),
         ],
       ),
     );

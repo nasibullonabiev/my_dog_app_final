@@ -9,7 +9,8 @@ import '../services/network_service.dart';
 import '../views/image_view.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  final int crossAxisCount;
+  const SearchPage({Key? key, this.crossAxisCount = 2}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -29,6 +30,9 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
     _apiGetAllBreed();
     controller.addListener(loadMore);
+  }
+  int get limit {
+    return widget.crossAxisCount * 15 >= 100 ? 90 : widget.crossAxisCount * 15;
   }
 
   String _displayStringForOption(Breed option) => option.name ?? "";
@@ -139,13 +143,13 @@ class _SearchPageState extends State<SearchPage> {
       body: MasonryGridView.count(
         shrinkWrap: true,
         controller: controller,
-        crossAxisCount: 2,
+        crossAxisCount: widget.crossAxisCount,
         itemCount: _images.length,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         padding: const EdgeInsets.all(10),
         itemBuilder: (context, index) {
-          return ImageView(image: _images[index], crossAxisCount: 2,);
+          return ImageView(image: _images[index], crossAxisCount: widget.crossAxisCount,);
         },
       ),
     );
