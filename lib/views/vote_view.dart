@@ -106,6 +106,7 @@ class _VoteViewState extends State<VoteView> with AutomaticKeepAliveClientMixin 
             const QuiltedGridTile(1, 1),
             const QuiltedGridTile(1, 1),
 
+
           ],
         ),
         childrenDelegate: SliverChildBuilderDelegate(
