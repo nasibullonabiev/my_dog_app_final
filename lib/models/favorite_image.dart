@@ -10,12 +10,12 @@ Favorite favoriteFromJson(String str) => Favorite.fromJson(json.decode(str));
 String favoriteToJson(Favorite data) => json.encode(data.toJson());
 class Favorite {
   Favorite({
-      this.id, 
-      this.userId, 
-      this.imageId, 
-      this.subId, 
-      this.createdAt, 
-      this.image,});
+    this.id,
+    this.userId,
+    this.imageId,
+    this.subId,
+    this.createdAt,
+    this.image,});
 
   Favorite.fromJson(dynamic json) {
     id = json['id'];
@@ -51,8 +51,8 @@ Image imageFromJson(String str) => Image.fromJson(json.decode(str));
 String imageToJson(Image data) => json.encode(data.toJson());
 class Image {
   Image({
-      this.id, 
-      this.url,});
+    this.id,
+    this.url,});
 
   Image.fromJson(dynamic json) {
     id = json['id'];

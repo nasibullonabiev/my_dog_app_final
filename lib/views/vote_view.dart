@@ -1,17 +1,13 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-
-import '../models/breed_model.dart';
-import '../models/vote_model.dart';
-import '../services/network_service.dart';
+import 'package:my_dog_app_final/models/vote_model.dart';
+import 'package:my_dog_app_final/models/image_model.dart';
+import 'package:my_dog_app_final/services/network_service.dart';
 
 class VoteView extends StatefulWidget {
-  final int crossAxisCount;
-  const VoteView({Key? key, this.crossAxisCount = 2}) : super(key: key);
+  const VoteView({Key? key}) : super(key: key);
 
   @override
   State<VoteView> createState() => _VoteViewState();
@@ -86,27 +82,15 @@ class _VoteViewState extends State<VoteView> with AutomaticKeepAliveClientMixin 
       child: GridView.custom(
         controller: _scrollController,
         gridDelegate: SliverQuiltedGridDelegate(
-          crossAxisCount: widget.crossAxisCount > 4 ? 6 : 4,
+          crossAxisCount: 4,
           mainAxisSpacing: 4,
           crossAxisSpacing: 4,
           repeatPattern: QuiltedGridRepeatPattern.inverted,
-          pattern: widget.crossAxisCount <= 4 ? [
+          pattern: [
             const QuiltedGridTile(2, 2),
             const QuiltedGridTile(1, 1),
             const QuiltedGridTile(1, 1),
             const QuiltedGridTile(1, 2),
-
-          ]:[
-            const QuiltedGridTile(2, 2),
-            const QuiltedGridTile(1, 1),
-            const QuiltedGridTile(1, 1),
-            const QuiltedGridTile(1, 2),
-            const QuiltedGridTile(1, 1),
-            const QuiltedGridTile(1, 1),
-            const QuiltedGridTile(1, 1),
-            const QuiltedGridTile(1, 1),
-
-
           ],
         ),
         childrenDelegate: SliverChildBuilderDelegate(

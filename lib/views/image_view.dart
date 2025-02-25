@@ -3,11 +3,9 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:my_dog_app_final/models/image_model.dart' as model;
-
-import '../pages/mobile/detail_page.dart';
-import '../services/network_service.dart';
+import 'package:my_dog_app_final/pages/mobile/detail_page.dart';
+import 'package:my_dog_app_final/services/network_service.dart';
 
 class ImageView extends StatefulWidget {
   final int crossAxisCount;
@@ -61,7 +59,7 @@ class _ImageViewState extends State<ImageView> {
       debugPrint(responseFavorite);
     }
   }
-  
+
   void openDetailPage() {
     Navigator.push(
         context,

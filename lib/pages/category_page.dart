@@ -5,8 +5,7 @@ import '../views/vote_view.dart';
 
 
 class CategoryPage extends StatefulWidget {
-  final int crossAxisCount;
-  const CategoryPage({Key? key, this.crossAxisCount = 2}) : super(key: key);
+  const CategoryPage({Key? key}) : super(key: key);
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -71,9 +70,9 @@ class _CategoryPageState extends State<CategoryPage> {
           selectedScreen = page;
           setState(() {});
         },
-        children:  [
-          FavoriteView(crossAxisCount: widget.crossAxisCount,),
-          VoteView(crossAxisCount: widget.crossAxisCount,),
+        children: const [
+          FavoriteView(),
+          VoteView(),
         ],
       ),
     );

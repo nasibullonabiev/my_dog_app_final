@@ -1,9 +1,5 @@
-import 'dart:async';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_dog_app_final/pages/profile_page.dart';
 
 import 'category_page.dart';
@@ -21,54 +17,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Connectivity _connectivity = Connectivity();
-  late StreamSubscription subscription;
+
   int _initialPage = 0;
-  bool isLoading = false;
 
   void _onPageChanged(int page) {
     _initialPage = page;
     setState(() {});
-  }
-  Future<void> initConnectivity() async {
-    late ConnectivityResult result;
-    try {
-      result = await _connectivity.checkConnectivity();
-      if(result == ConnectivityResult.mobile || result == ConnectivityResult.wifi || result == ConnectivityResult.ethernet){
-
-        isLoading = false;
-        setState((){});
-      }else{
-        isLoading = true;
-        setState((){});
-      }
-    } on PlatformException catch (e) {
-      debugPrint('Couldn\'t check connectivity status: $e');
-      return;
-    }
   }
 
   Color _iconColor(int page) => _initialPage == page ? Colors.black : Colors.grey;
   double _iconSize(int page) => _initialPage == page ? 34 : 32;
 
   @override
-  void initState() {
-    super.initState();
-    initConnectivity();
-    subscription = Connectivity().onConnectivityChanged.listen((event) {
-      if(event == ConnectivityResult.mobile || event == ConnectivityResult.wifi || event == ConnectivityResult.ethernet) {
-        isLoading = false;
-        setState((){});
-      }else{
-        isLoading = true;
-        setState((){});
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return !isLoading ? Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Row(
         children: [
@@ -122,6 +84,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+
           Visibility(
             visible: widget.crossAxisCount > 3 && widget.crossAxisCount < 6,
             child: NavigationRail(
@@ -129,19 +92,19 @@ class _HomePageState extends State<HomePage> {
                 onDestinationSelected: _onPageChanged,
                 destinations: [
                   NavigationRailDestination(
-                    label: const Text("Home"),
+                    label: Text("Home"),
                     icon: Icon(Icons.home_filled, size: _iconSize(0), color: _iconColor(0)),
                   ),
                   NavigationRailDestination(
-                    label: const Text("Search"),
+                    label: Text("Search"),
                     icon: Icon(Icons.search, size: _iconSize(1), color: _iconColor(1)),
                   ),
                   NavigationRailDestination(
-                    label: const Text("Category"),
+                    label: Text("Category"),
                     icon: Icon(CupertinoIcons.chat_bubble_text_fill, size: _iconSize(2), color: _iconColor(2)),
                   ),
                   NavigationRailDestination(
-                    label: const Text("Profile"),
+                    label: Text("Profile"),
                     icon: Icon(CupertinoIcons.profile_circled, size: _iconSize(3), color: _iconColor(3)),
                   ),
                 ],
@@ -154,8 +117,8 @@ class _HomePageState extends State<HomePage> {
               index: _initialPage,
               children: [
                 HomeScreen(crossAxisCount: widget.crossAxisCount, subPage: widget.subPage),
-                SearchPage(crossAxisCount: widget.crossAxisCount,),
-                CategoryPage(crossAxisCount: widget.crossAxisCount,),
+                const SearchPage(),
+                const CategoryPage(),
                 ProfilePage(crossAxisCount: widget.crossAxisCount,),
               ],
             ),
@@ -204,16 +167,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ) : null,
-    ): Scaffold(
-      body: Center(child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text("No internet connection!", style: TextStyle(fontSize: 18),),
-          SizedBox(width: 20,),
-          Icon(Icons.wifi_off_sharp),
-        ],
-      ),),
     );
   }
 }

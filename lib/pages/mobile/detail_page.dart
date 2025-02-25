@@ -1,17 +1,13 @@
-import 'dart:io';
 import 'dart:math';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:my_dog_app_final/models/image_model.dart'as model;
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
+import 'package:my_dog_app_final/models/image_model.dart' as model;
+import 'package:my_dog_app_final/services/network_service.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../services/network_service.dart';
 import '../../services/util_service.dart';
 import '../../views/gallery_view.dart';
-
 
 class DetailPage extends StatefulWidget {
   final int crossAxisCount;
@@ -36,21 +32,8 @@ class _DetailPageState extends State<DetailPage> {
     _convertData();
   }
 
-
   int get limit {
-    return widget.crossAxisCount * 15;
-  }
-
-  void _onShare()async{
-    final uri = Uri.parse(image.url!);
-    final res = await http.get(uri);
-    final bytes = res.bodyBytes;
-    final temp = await getApplicationDocumentsDirectory();
-    debugPrint(temp.path);
-    final path = '${temp.path}/image.jpg';
-    debugPrint(path);
-    File(path).writeAsBytesSync(bytes);
-    await Share.shareFiles([path]);
+    return widget.crossAxisCount * 15 >= 100 ? 90 : widget.crossAxisCount * 15;
   }
 
   void _convertData() {
@@ -64,17 +47,6 @@ class _DetailPageState extends State<DetailPage> {
     }
     setState(() {});
   }
-
-  void saveImage()async{
-    String url = image.url.toString();
-    await GallerySaver.saveImage(url);
-    Util.fireSnackBar("Your photo is successfully saved", context);
-
-  }
-
-
-
-
 
   void pressVote() async {
     String? responseCreate;
@@ -92,7 +64,21 @@ class _DetailPageState extends State<DetailPage> {
 
     setState(() {});
   }
-
+// #saveImageDetailPage
+  void saveImage(String images) async {
+    if(kIsWeb) {
+      await NetworkService.GETDOWNLOADWEB(images,image.createdAt!);
+    }
+    else{
+      await NetworkService.GETDOWNLOAD(images,image.width.toString()).whenComplete(() {
+        Util.fireSnackBar("Image was uploaded successfully", context);
+      });
+    }
+  }
+  // #shareImageDetailPage
+  void shareImage(String image) async {
+    await Share.share("Check this out $image");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +100,7 @@ class _DetailPageState extends State<DetailPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            
+
             // #image
             Container(
               clipBehavior: Clip.antiAlias,
@@ -122,23 +108,22 @@ class _DetailPageState extends State<DetailPage> {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
               ),
               foregroundDecoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.center,
-                  colors: [
-                    Colors.black.withOpacity(0.9),
-                    Colors.black.withOpacity(0.6),
-                    Colors.black.withOpacity(0.2),
-                    Colors.black.withOpacity(0.1),
-                  ]
-                )
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.center,
+                      colors: [
+                        Colors.black.withOpacity(0.9),
+                        Colors.black.withOpacity(0.6),
+                        Colors.black.withOpacity(0.2),
+                        Colors.black.withOpacity(0.1),
+                      ]
+                  )
               ),
               child: AspectRatio(
                 aspectRatio: ratio,
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
-
                   imageUrl: image.url!,
                   placeholder: (context, url) => Container(
                     color: Colors.primaries[Random().nextInt(18) % 18],
@@ -147,7 +132,7 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
-            
+
             // #footer
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -181,9 +166,9 @@ class _DetailPageState extends State<DetailPage> {
                   Visibility(
                     visible: title.isNotEmpty,
                     child: Text(title, style: const TextStyle(
-                      fontSize: 25,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold
+                        fontSize: 25,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
                     ),),
                   ),
                   const SizedBox(height: 10,),
@@ -210,7 +195,7 @@ class _DetailPageState extends State<DetailPage> {
                       Expanded(
                         flex: 2,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: (){},
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             primary: const Color.fromRGBO(239, 239, 239, 1),
@@ -226,7 +211,10 @@ class _DetailPageState extends State<DetailPage> {
                       Expanded(
                         flex: 2,
                         child: ElevatedButton(
-                          onPressed: saveImage,
+                          onPressed:() {
+                            print(image.url!);
+                            saveImage(image.url!);
+                          },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             primary: Colors.red,
@@ -242,7 +230,7 @@ class _DetailPageState extends State<DetailPage> {
                         flex: 1,
                         child: IconButton(
                           icon: const Icon(Icons.share, size: 30,),
-                          onPressed: _onShare,
+                          onPressed: () => shareImage(image.url.toString()),
                         ),
                       ),
                     ],
@@ -253,11 +241,11 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
             const SizedBox(height: 2,),
-            
+
             // #similary
             Container(
               constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height
+                  minHeight: MediaQuery.of(context).size.height
               ),
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -276,7 +264,7 @@ class _DetailPageState extends State<DetailPage> {
                     api: NetworkService.API_IMAGE_LIST,
                     crossAxisCount: widget.crossAxisCount,
                     params: NetworkService.paramsImageSearch(size: "small", breedId: image.breedIds,
-                        limit: limit,
+                      limit: limit,
                     ),
                     physics: const NeverScrollableScrollPhysics(),
                   ),

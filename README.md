@@ -1,21 +1,22 @@
 # Hi, I'm Nasibullo
 
-# This application is not completed yet. Currently, I am working on it.
-I am developing this program to learn Flutter and Internet connection.
+# I built this application using Flutter and integrated The Dog API to display a vast collection of dog breeds with detailed information. The app allows users to:
+# Browse different dog breeds with images and descriptions
+# Search for specific breeds
+# Save favorite dogs
+# Vote on dogs
+# Upload images
+
+I am developed this program to learn Flutter and Internet connection.
 
 ## 😃 Author
-**Nabiev Nasibullo** [Telegram: My Telegram](https://t.me/f19012022_N)
-**Download App from Telegram channel** [Telegram: My Telegram Channel](https://t.me/+YQimJfJQPqQwZDUy) 
+**Nabiev Nasibullo** 
+
 <img src="screens/my_image.jpeg" height="500em" />
 
 ## Application for searching and downloading pictures of cute puppies
 
 # ScreenShots
-# Home Page
-<img src="screens/home_page.png" height="600em" />
-
-# My Dogs Page
-<img src="screens/my_dog.png" height="600em" />
 
 # Search Page
 <img src="screens/search_page.png" height="600em" />

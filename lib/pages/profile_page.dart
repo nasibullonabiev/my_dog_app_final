@@ -148,59 +148,59 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Center(
                   child: file == null
                       ? GestureDetector(
-                          onTap: _getImage,
-                          child: Container(
-                            alignment: const Alignment(0, 0.35),
-                            constraints: const BoxConstraints(
-                              minWidth: 250,
-                              minHeight: 250,
-                              maxHeight: 400,
-                              maxWidth: 400,
-                            ),
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                              image:
-                                  AssetImage("assets/images/place_holder.jpeg"),
-                            )),
-                            child: const Icon(
-                              Icons.add_circle_outline,
-                              color: Colors.white,
-                              size: 80,
-                            ),
-                          ),
-                        )
+                    onTap: _getImage,
+                    child: Container(
+                      alignment: const Alignment(0, 0.35),
+                      constraints: const BoxConstraints(
+                        minWidth: 250,
+                        minHeight: 250,
+                        maxHeight: 400,
+                        maxWidth: 400,
+                      ),
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                            AssetImage("assets/images/place_holder.jpeg"),
+                          )),
+                      child: const Icon(
+                        Icons.add_circle_outline,
+                        color: Colors.white,
+                        size: 80,
+                      ),
+                    ),
+                  )
                       : Container(
-                          constraints: const BoxConstraints(
-                            minWidth: 250,
-                            minHeight: 250,
-                            maxHeight: 400,
-                            maxWidth: 400,
-                          ),
-                          child: Stack(
-                            alignment: Alignment.topRight,
-                            children: [
-                              Image.file(
-                                file!,
-                                fit: BoxFit.cover,
-                              ),
-                              IconButton(
-                                  onPressed: _clear,
-                                  splashRadius: 25,
-                                  icon: const Icon(
-                                    Icons.cancel_outlined,
-                                    color: Colors.white,
-                                    size: 30,
-                                    shadows: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 7,
-                                        spreadRadius: 7,
-                                      ),
-                                    ],
-                                  ))
-                            ],
-                          ),
+                    constraints: const BoxConstraints(
+                      minWidth: 250,
+                      minHeight: 250,
+                      maxHeight: 400,
+                      maxWidth: 400,
+                    ),
+                    child: Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        Image.file(
+                          file!,
+                          fit: BoxFit.cover,
                         ),
+                        IconButton(
+                            onPressed: _clear,
+                            splashRadius: 25,
+                            icon: const Icon(
+                              Icons.cancel_outlined,
+                              color: Colors.white,
+                              size: 30,
+                              shadows: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 7,
+                                  spreadRadius: 7,
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Expanded(

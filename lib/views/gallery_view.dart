@@ -1,10 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../models/image_model.dart';
-import '../services/network_service.dart';
-import 'image_view.dart';
-
+import 'package:my_dog_app_final/models/image_model.dart';
+import 'package:my_dog_app_final/services/network_service.dart';
+import 'package:my_dog_app_final/views/image_view.dart';
 
 class GalleryView extends StatefulWidget {
   final int crossAxisCount;

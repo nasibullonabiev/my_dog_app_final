@@ -15,16 +15,13 @@ dependencies:
 
 
   gallery_saver: any
-  path_provider: any
+
   # for design
   cupertino_icons: ^1.0.2
 
   # connect network
   http: ^0.13.4
   http_interceptor: ^1.0.2
-  connectivity_plus: any
-  share_plus: any
-  url_strategy: any
 
   # database
   hive_flutter: ^1.1.0
@@ -37,6 +34,13 @@ dependencies:
   # decoration
   flutter_staggered_grid_view: ^0.6.2
   lottie: ^1.3.0
+  # html
+  universal_html: ^2.0.8
+  #permission handler
+  permission_handler: ^10.0.0
+  path_provider: ^2.0.11
+  # share image
+  share_plus: ^4.0.10
 
 
 dev_dependencies:
