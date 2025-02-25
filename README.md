@@ -10,7 +10,7 @@
 I developed this program to learn Flutter and Internet connection.
 
 ## 😃 Author
-**Nabiev Nasibullo** 
+# Nabiev Nasibullo
 
 
 ## Application for searching and downloading pictures of cute puppies
